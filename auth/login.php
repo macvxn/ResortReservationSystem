@@ -147,6 +147,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         <?php endif; ?>
         
+        <?php if (isset($_GET['blocked'])): ?>
+    <div class="alert alert-danger">
+        <strong>⚠️ Account Blocked</strong>
+        <p>Your account has been blocked by the administrator. Please contact support for more information.</p>
+    </div>
+<?php endif; ?>
+        
         <form method="POST">
             <div class="form-group">
                 <label>Email Address</label>

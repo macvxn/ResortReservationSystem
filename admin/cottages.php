@@ -218,6 +218,15 @@ $stats = $stats_stmt->fetch();
                             </td>
                             <td>
                                 <div class="action-buttons">
+                                  
+                                      <!-- ADD THIS VIEW BUTTON -->
+    <a href="view-cottage.php?id=<?= $cottage['cottage_id'] ?>" 
+       class="btn btn-sm btn-primary" 
+       title="View Details">
+        <i class="fas fa-eye"></i>
+    </a>
+    
+                                  
                                     <a href="edit-cottage.php?id=<?= $cottage['cottage_id'] ?>" 
                                        class="btn btn-sm btn-info" 
                                        title="Edit">
@@ -465,6 +474,24 @@ $stats = $stats_stmt->fetch();
                 flex-wrap: wrap;
             }
         }
+        .btn-primary {
+    background: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+.status-active {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-inactive {
+    background: #f8d7da;
+    color: #721c24;
+}
     </style>
 </body>
 </html>

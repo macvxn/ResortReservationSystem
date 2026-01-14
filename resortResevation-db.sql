@@ -272,3 +272,19 @@ DELIMITER ;
 
 ALTER TABLE user_profiles 
 ADD COLUMN id_number VARCHAR(50) NULL AFTER address;
+
+-- Add status column to users table
+ALTER TABLE users 
+ADD COLUMN status ENUM('active', 'blocked') DEFAULT 'active' AFTER role;
+
+-- Add blocked_by and blocked_at for tracking
+ALTER TABLE users 
+ADD COLUMN blocked_by INT NULL AFTER status,
+ADD COLUMN blocked_at DATETIME NULL AFTER blocked_by,
+ADD COLUMN block_reason TEXT NULL AFTER blocked_at;
+
+-- Add foreign key for blocked_by
+ALTER TABLE users 
+ADD CONSTRAINT fk_blocked_by 
+FOREIGN KEY (blocked_by) REFERENCES users(user_id) ON DELETE SET NULL;
+
