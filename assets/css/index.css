@@ -1,0 +1,202 @@
+/* Responsive Theme - Additive only, backward compatible */
+/* Primary Color: Light off-white/beige background */
+body {
+    background-color: #F5F5DC !important;
+    background-image: var(--bg-image, none);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+/* Container with responsive enhancements */
+.container {
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(47, 79, 79, 0.1);
+    max-width: 1200px;
+    margin: 30px auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Hero section with new color scheme */
+.hero {
+    background: linear-gradient(135deg, #2F4F4F 0%, #1C2E2E 100%) !important;
+    color: #F5F5DC !important;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    padding: 50px 20px !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../images/background.jpg') center/cover no-repeat;
+    opacity: 0.15;
+    z-index: 0;
+}
+
+.hero h1 {
+    color: #F5F5DC !important;
+    font-size: 2.5rem !important;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+/* Features grid - responsive */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+}
+
+.feature-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(47, 79, 79, 0.05);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(47, 79, 79, 0.1);
+    border-color: #B8860B;
+}
+
+.feature-card h3 {
+    color: #2F4F4F !important;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.feature-card h3::before {
+    content: '✓';
+    color: #B8860B;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+/* Buttons with new accent color */
+.btn {
+    background-color: #2F4F4F !important;
+    border-color: #2F4F4F !important;
+    color: #F5F5DC !important;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin: 10px;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #1C2E2E !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(47, 79, 79, 0.2);
+}
+
+.btn-secondary {
+    background-color: #B8860B !important;
+    border-color: #B8860B !important;
+}
+
+.btn-secondary:hover {
+    background-color: #9C7009 !important;
+}
+
+/* Contact info section */
+.contact-info {
+    margin-top: 50px;
+    padding: 30px;
+    background: linear-gradient(135deg, #2F4F4F 0%, #1C2E2E 100%);
+    border-radius: 12px;
+    color: #F5F5DC;
+    text-align: center;
+}
+
+.contact-info h2 {
+    color: #F5F5DC;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.contact-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #F5F5DC;
+}
+
+.contact-icon {
+    color: #B8860B;
+    font-size: 1.2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        margin: 15px;
+        padding: 20px;
+    }
+    
+    .hero {
+        padding: 30px 15px !important;
+    }
+    
+    .hero h1 {
+        font-size: 2rem !important;
+    }
+    
+    .features {
+        grid-template-columns: 1fr;
+    }
+    
+    .btn {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    .contact-details {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.6rem !important;
+    }
+    
+    .feature-card {
+        padding: 20px;
+    }
+}
