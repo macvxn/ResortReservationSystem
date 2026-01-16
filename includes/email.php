@@ -278,4 +278,102 @@ function getReservationEmailTemplate($name, $details) {
     </html>
     ";
 }
+
+/**
+ * Send password reset email
+ */
+function sendPasswordResetEmail($to_email, $reset_token) {
+    $mail = new PHPMailer(true);
+
+    try {
+        $mail->isSMTP();
+        $mail->Host       = SMTP_HOST;
+        $mail->SMTPAuth   = true;
+        $mail->Username   = SMTP_USERNAME;
+        $mail->Password   = SMTP_PASSWORD;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = SMTP_PORT;
+
+        $mail->setFrom(SMTP_FROM_EMAIL, 'Resort Reservation System');
+        $mail->addAddress($to_email);
+
+        $mail->isHTML(true);
+        $mail->Subject = 'Password Reset Request - Resort Reservation';
+        
+        // Create reset link
+        $reset_link = BASE_URL . "auth/reset-password.php?token=" . $reset_token;
+        
+        $mail->Body = getPasswordResetEmailTemplate($reset_link);
+        $mail->AltBody = "Password Reset Request\n\nClick this link to reset your password:\n$reset_link\n\nThis link will expire in 1 hour.\n\nIf you didn't request this, please ignore this email.";
+
+        $mail->send();
+        return ['success' => true, 'message' => 'Email sent successfully'];
+        
+    } catch (Exception $e) {
+        error_log("Password Reset Email Error: {$mail->ErrorInfo}");
+        return ['success' => false, 'message' => "Failed to send email: {$mail->ErrorInfo}"];
+    }
+}
+
+/**
+ * Password Reset Email Template
+ */
+function getPasswordResetEmailTemplate($reset_link) {
+    return "
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset='UTF-8'>
+        <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+            .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+            .button { display: inline-block; padding: 15px 30px; background: #667eea; color: white !important; text-decoration: none; border-radius: 5px; margin: 20px 0; font-weight: bold; }
+            .warning { background: #fff3cd; border: 1px solid #ffc107; padding: 15px; border-radius: 5px; margin: 20px 0; }
+            .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
+        </style>
+    </head>
+    <body>
+        <div class='container'>
+            <div class='header'>
+                <h1>🔒 Password Reset Request</h1>
+            </div>
+            <div class='content'>
+                <p>Hello,</p>
+                <p>We received a request to reset your password for your Resort Reservation account.</p>
+                <p>Click the button below to create a new password:</p>
+                
+                <div style='text-align: center;'>
+                    <a href='$reset_link' class='button'>Reset My Password</a>
+                </div>
+                
+                <p style='color: #666; font-size: 14px; margin-top: 20px;'>
+                    Or copy and paste this link into your browser:<br>
+                    <a href='$reset_link' style='color: #667eea; word-break: break-all;'>$reset_link</a>
+                </p>
+                
+                <div class='warning'>
+                    <strong>⚠️ Important:</strong>
+                    <ul style='margin: 10px 0; padding-left: 20px;'>
+                        <li>This link will expire in <strong>1 hour</strong></li>
+                        <li>If you didn't request this reset, please ignore this email</li>
+                        <li>Your password will not change until you create a new one</li>
+                        <li>Never share this link with anyone</li>
+                    </ul>
+                </div>
+                
+                <p style='margin-top: 30px;'>
+                    If you're having trouble with the button, you can also reset your password by visiting the login page and clicking \"Forgot Password\".
+                </p>
+            </div>
+            <div class='footer'>
+                <p>© 2025 Resort Reservation System. All rights reserved.</p>
+                <p>This is an automated email, please do not reply.</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    ";
+}
 ?>

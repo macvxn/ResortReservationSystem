@@ -288,3 +288,10 @@ ALTER TABLE users
 ADD CONSTRAINT fk_blocked_by 
 FOREIGN KEY (blocked_by) REFERENCES users(user_id) ON DELETE SET NULL;
 
+-- Add password reset fields to users table
+ALTER TABLE users 
+ADD COLUMN reset_token VARCHAR(64) NULL AFTER block_reason,
+ADD COLUMN reset_token_expires DATETIME NULL AFTER reset_token;
+
+-- Create index for faster lookups
+CREATE INDEX idx_reset_token ON users(reset_token);

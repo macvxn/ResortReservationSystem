@@ -97,6 +97,7 @@ $active_cottages = $stmt->fetch()['count'];
                 <a href="cottages.php">Manage Cottages</a>
                 <a href="reports.php">reports</a>
                 <a href="audit-logs.php">logs</a>
+                 <a href="settings.php">settings</a>
                 <a href="users.php">user management</a>
                 <a href="../auth/logout.php">Logout</a>
             </div>

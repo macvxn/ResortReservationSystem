@@ -139,9 +139,6 @@ $stats = $stats_stmt->fetch();
             <a href="add-cottage.php" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Add New Cottage
             </a>
-            <a href="bulk-upload.php" class="btn btn-secondary">
-                <i class="fas fa-upload"></i> Bulk Upload
-            </a>
             <a href="export-cottages.php" class="btn btn-info">
                 <i class="fas fa-download"></i> Export List
             </a>
